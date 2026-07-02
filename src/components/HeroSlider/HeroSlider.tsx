@@ -29,7 +29,7 @@ const slideData = [
   {
     id: "04",
     title: "최신 새장비\n기업맞춤제안\n1:1무료상담",
-    description": "칼라테크OA만의 상생철학\n신제품뿐만 아니라 중고부터 리퍼까지\n고객상황에 맞는 맞춤 솔루션\n고객만족 최우선",
+    description: "칼라테크OA만의 상생철학\n신제품뿐만 아니라 중고부터 리퍼까지\n고객상황에 맞는 맞춤 솔루션\n고객만족 최우선",
     buttonText: "자세히보기",
     image: "/images/slide_04.png"
   }
