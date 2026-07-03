@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider/HeroSlider";
 import Services from "@/components/Services/Services";
+import ProductsSection from "@/components/Products/ProductsSection";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <main className="flex-grow w-full">
         <HeroSlider />
         <Services />
+        <ProductsSection />
       </main>
     </div>
   );
