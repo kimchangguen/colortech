@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants, type Easing } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 interface SlideProps {
@@ -15,10 +15,10 @@ interface SlideProps {
 
 const HeroSlide: React.FC<SlideProps> = ({ slide, isActive }) => {
   // Animation settings based on user request
-  const easing = [0.4, 0, 0.2, 1];
+  const easing: Easing = [0.4, 0, 0.2, 1];
   const transitionDuration = 0.5;
 
-  const contentVariants = {
+  const contentVariants: Variants = {
     hidden: { opacity: 0, x: 40 },
     visible: { 
       opacity: 1, 
@@ -33,12 +33,12 @@ const HeroSlide: React.FC<SlideProps> = ({ slide, isActive }) => {
     exit: { opacity: 0, x: -40, transition: { duration: transitionDuration, ease: easing } }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easing } }
   };
 
-  const imageVariants = {
+  const imageVariants: Variants = {
     hidden: { opacity: 0, scale: 1.02, x: 40 },
     visible: { opacity: 1, scale: 1, x: 0, transition: { duration: transitionDuration, ease: easing } },
     exit: { opacity: 0, scale: 1.02, x: -40, transition: { duration: transitionDuration, ease: easing } }
