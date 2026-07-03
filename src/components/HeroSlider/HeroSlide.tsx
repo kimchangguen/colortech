@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, type Variants, type Easing } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 interface SlideProps {
@@ -15,7 +15,6 @@ interface SlideProps {
 
 const HeroSlide: React.FC<SlideProps> = ({ slide, isActive }) => {
   // Animation settings based on user request
-  const easing: Easing = [0.4, 0, 0.2, 1];
   const transitionDuration = 0.5;
 
   const contentVariants: Variants = {
@@ -25,23 +24,23 @@ const HeroSlide: React.FC<SlideProps> = ({ slide, isActive }) => {
       x: 0, 
       transition: { 
         duration: transitionDuration, 
-        ease: easing,
+        ease: "easeOut",
         staggerChildren: 0.1,
         delayChildren: 0.15
       } 
     },
-    exit: { opacity: 0, x: -40, transition: { duration: transitionDuration, ease: easing } }
+    exit: { opacity: 0, x: -40, transition: { duration: transitionDuration, ease: "easeOut" } }
   };
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easing } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
   const imageVariants: Variants = {
     hidden: { opacity: 0, scale: 1.02, x: 40 },
-    visible: { opacity: 1, scale: 1, x: 0, transition: { duration: transitionDuration, ease: easing } },
-    exit: { opacity: 0, scale: 1.02, x: -40, transition: { duration: transitionDuration, ease: easing } }
+    visible: { opacity: 1, scale: 1, x: 0, transition: { duration: transitionDuration, ease: "easeOut" } },
+    exit: { opacity: 0, scale: 1.02, x: -40, transition: { duration: transitionDuration, ease: "easeOut" } }
   };
 
   return (
