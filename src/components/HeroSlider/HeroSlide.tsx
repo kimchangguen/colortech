@@ -16,7 +16,7 @@ interface SlideProps {
 const HeroSlide: React.FC<SlideProps> = ({ slide, isActive }) => {
   // Animation settings based on user request
   const easing = [0.4, 0, 0.2, 1];
-  const transitionDuration = 0.8;
+  const transitionDuration = 0.5;
 
   const contentVariants = {
     hidden: { opacity: 0, x: 40 },

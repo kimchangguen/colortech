@@ -44,7 +44,7 @@ const HeroSlider = () => {
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slideData.length);
-    }, 5000);
+    }, 3500);
 
     return () => clearInterval(interval);
   }, [isHovered]);
