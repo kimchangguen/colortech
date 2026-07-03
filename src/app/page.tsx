@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider/HeroSlider";
+import Services from "@/components/Services/Services";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <Header />
       <main className="flex-grow w-full">
         <HeroSlider />
+        <Services />
       </main>
     </div>
   );
