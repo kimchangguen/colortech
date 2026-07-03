@@ -69,31 +69,44 @@ export default function BlogList({ posts }: BlogListProps) {
   };
 
   const hasRealPosts = posts && posts.length > 0;
-  const displayPosts = hasRealPosts ? posts : MOCK_POSTS;
+
+  if (!hasRealPosts) {
+    return (
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mb-32 flex flex-col items-center justify-center text-center">
+        <h3 className="text-[24px] md:text-[28px] font-bold text-[#111111] mb-4">
+          아직 등록된 게시글이 없습니다.
+        </h3>
+        <p className="text-[16px] text-[#666666] mb-8">
+          최신 설치사례와 복합기 정보를 곧 만나보실 수 있습니다.
+        </p>
+        <Link 
+          href="/" 
+          className="inline-flex items-center justify-center px-8 py-3.5 bg-[#111111] text-white text-[15px] font-medium rounded-full hover:bg-[#333333] transition-colors"
+        >
+          홈으로 이동
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mb-20">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-16">
-        {displayPosts.map((post: any) => {
-          let imageUrl = post.image || '/images/placeholder.jpg';
-          let categoryName = post.category || '블로그';
-          let title = post.title;
-          let dateStr = post.date;
+        {posts.map((post: any) => {
+          let imageUrl = '/images/placeholder.jpg';
+          let categoryName = '블로그';
+          
+          const title = decodeHtml(post.title.rendered);
+          const dateStr = formatDate(post.date);
 
-          // Parse WordPress post data if real
-          if (hasRealPosts) {
-            title = decodeHtml(post.title.rendered);
-            dateStr = formatDate(post.date);
+          if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'].length > 0) {
+            imageUrl = post._embedded['wp:featuredmedia'][0].source_url;
+          }
 
-            if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'].length > 0) {
-              imageUrl = post._embedded['wp:featuredmedia'][0].source_url;
-            }
-
-            if (post._embedded && post._embedded['wp:term']) {
-              const categories = post._embedded['wp:term'][0];
-              if (categories && categories.length > 0) {
-                categoryName = categories[0].name;
-              }
+          if (post._embedded && post._embedded['wp:term']) {
+            const categories = post._embedded['wp:term'][0];
+            if (categories && categories.length > 0) {
+              categoryName = categories[0].name;
             }
           }
 
@@ -101,7 +114,7 @@ export default function BlogList({ posts }: BlogListProps) {
             <Link href={`/blog/${post.slug}`} key={post.id} className="block group cursor-pointer bg-transparent">
               <div className="flex flex-col h-full">
                 
-                {/* Thumbnail Area (Height ~240px, Radius 22px, No border) */}
+                {/* Thumbnail Area */}
                 <div className="relative w-full h-[240px] rounded-[22px] overflow-hidden bg-gray-100 mb-5">
                   <Image 
                     src={imageUrl} 
@@ -112,7 +125,7 @@ export default function BlogList({ posts }: BlogListProps) {
                   />
                 </div>
                 
-                {/* Text Area (Height ~120px) */}
+                {/* Text Area */}
                 <div className="flex flex-col flex-grow min-h-[120px]">
                   <span className="text-[15px] font-[500] text-[#777777] mb-2 block">
                     {categoryName} &middot; {dateStr}
