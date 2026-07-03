@@ -3,6 +3,7 @@ import HeroSlider from "@/components/HeroSlider/HeroSlider";
 import Services from "@/components/Services/Services";
 import ProductsSection from "@/components/Products/ProductsSection";
 import FaqSection from "@/components/FAQ/FaqSection";
+import InstallationSection from "@/components/Installation/InstallationSection";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Services />
         <ProductsSection />
         <FaqSection />
+        <InstallationSection />
       </main>
     </div>
   );

@@ -71,3 +71,32 @@ export async function getAdjacentPosts(date: string) {
     return { prev: null, next: null };
   }
 }
+
+export async function getPostsByCategoryName(categoryName: string, perPage: number = 20): Promise<WP_Post[]> {
+  try {
+    // 1. Get category ID
+    const catRes = await fetch(`${WP_API}/categories?search=${encodeURIComponent(categoryName)}`, {
+      next: { revalidate: 300 }
+    });
+    const categories = await catRes.json();
+    
+    if (!categories || categories.length === 0) {
+      console.warn(`Category "${categoryName}" not found.`);
+      return [];
+    }
+    
+    // Find exact match or use the first result
+    const category = categories.find((c: any) => c.name === categoryName) || categories[0];
+    const categoryId = category.id;
+
+    // 2. Get posts by category ID
+    const res = await fetch(`${WP_API}/posts?_embed&per_page=${perPage}&categories=${categoryId}`, {
+      next: { revalidate: 300 }
+    });
+    if (!res.ok) throw new Error('Failed to fetch posts');
+    return res.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
