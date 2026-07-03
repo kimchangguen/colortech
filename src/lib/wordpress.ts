@@ -15,6 +15,11 @@ export interface WP_Post {
       source_url: string;
       alt_text: string;
     }>;
+    'wp:term'?: Array<Array<{
+      id: number;
+      name: string;
+      slug: string;
+    }>>;
   };
 }
 
@@ -98,5 +103,59 @@ export async function getPostsByCategoryName(categoryName: string, perPage: numb
   } catch (error) {
     console.error(error);
     return [];
+  }
+}
+
+export interface GetPostsOptions {
+  page?: number;
+  per_page?: number;
+  categories?: number;
+  search?: string;
+  exclude?: number[];
+}
+
+export async function getPostsAdvanced(options: GetPostsOptions = {}) {
+  const { page = 1, per_page = 9, categories, search, exclude } = options;
+  try {
+    const params = new URLSearchParams({
+      _embed: 'true',
+      per_page: per_page.toString(),
+      page: page.toString(),
+    });
+
+    if (categories) params.append('categories', categories.toString());
+    if (search) params.append('search', search);
+    if (exclude && exclude.length > 0) params.append('exclude', exclude.join(','));
+
+    const res = await fetch(`${WP_API}/posts?${params.toString()}`, {
+      next: { revalidate: 300 }
+    });
+
+    if (!res.ok) throw new Error('Failed to fetch posts');
+    
+    const totalPages = parseInt(res.headers.get('x-wp-totalpages') || '1', 10);
+    const totalPosts = parseInt(res.headers.get('x-wp-total') || '0', 10);
+    const posts: WP_Post[] = await res.json();
+
+    return { posts, totalPages, totalPosts };
+  } catch (error) {
+    console.error(error);
+    return { posts: [], totalPages: 0, totalPosts: 0 };
+  }
+}
+
+export async function getCategoryByName(name: string): Promise<number | null> {
+  if (name === '전체' || !name) return null;
+  try {
+    const res = await fetch(`${WP_API}/categories?search=${encodeURIComponent(name)}`, {
+      next: { revalidate: 300 }
+    });
+    const categories = await res.json();
+    if (!categories || categories.length === 0) return null;
+    const exactMatch = categories.find((c: any) => c.name === name);
+    return exactMatch ? exactMatch.id : categories[0].id;
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 }
