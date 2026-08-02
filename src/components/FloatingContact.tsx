@@ -7,7 +7,7 @@ export default function FloatingContact() {
     <aside
       aria-label="빠른 문의"
       className="fixed bottom-5 z-40 flex flex-col gap-3 md:bottom-8"
-      style={{ left: 'max(16px, env(safe-area-inset-left))', right: 'auto' }}
+      style={{ left: 'auto', right: 'max(16px, env(safe-area-inset-right))' }}
     >
       <a href="tel:027191644" aria-label="전화 문의 02-719-1644" title="전화 문의" className={itemClass}>
         <Phone size={24} aria-hidden="true" />
