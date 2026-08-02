@@ -377,7 +377,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "뉴스메이커",
     "title": "사람을 소중히 할 줄 모르는 기업은 큰 성장을 이룰 수 없다",
     "category": "대표 인터뷰",
-    "summary": "인재·고객 중심 경영과 사회적 책임 소개",
+    "summary": "고객·인재 중심 경영, 직영점 확대, 사회공헌 및 렌탈 서비스 경쟁력 소개",
     "url": "https://www.newsmaker.or.kr/news/quickViewArticleView.html?idxno=133796"
   },
   {
@@ -387,7 +387,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "뉴스메이커",
     "title": "국내 경제의 일선에서 합리적인 조력자 역할 수행하겠다",
     "category": "대표 인터뷰",
-    "summary": "공유경제 경영전략과 복합기 렌탈 서비스 소개",
+    "summary": "공유경제와 맞춤형 사무기기 렌탈 서비스, 사업 확장 전략 소개",
     "url": "https://www.newsmaker.or.kr/news/articleView.html?idxno=138815"
   },
   {
@@ -397,7 +397,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "동아일보",
     "title": "비포 서비스를 통해 고객의 마음속으로 홀인원",
     "category": "기업 소개",
-    "summary": "맞춤형 솔루션과 캐논코리아 공식 파트너 계약 소개",
+    "summary": "맞춤형 솔루션, 캐논코리아 공식 파트너 계약, 비포 서비스 소개",
     "url": "https://www.donga.com/news/Economy/article/all/20241218/130665177/2"
   },
   {
@@ -405,9 +405,9 @@ export const pressArchive: PressArchiveItem[] = [
     "year": "2025",
     "date": "2025-03-05",
     "source": "이코노미스트",
-    "title": "복합기 전문기업 칼라테크오에이, 복합기 렌탈 단기 성장률 1위",
+    "title": "복합기 전문기업 '칼라테크오에이', 복합기 렌탈 단기 성장률 1위",
     "category": "성장·실적",
-    "summary": "파트너사 확대, 맞춤형 솔루션과 수도권 지점 확장 소개",
+    "summary": "파트너사 확대, 맞춤형 솔루션, 지점 확장과 성장 실적 소개",
     "url": "https://economist.co.kr/article/view/ecn202503050070"
   },
   {
@@ -417,8 +417,68 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "뉴스메이커",
     "title": "대한민국 복합기 렌탈 시장의 새로운 리더",
     "category": "기업 소개",
-    "summary": "캐논코리아 공식 파트너 계약과 복합기 렌탈 사업 소개",
+    "summary": "캐논코리아 공식 파트너와 복합기 렌탈시장 경쟁력 소개",
     "url": "https://www.newsmaker.or.kr/news/articleView.html?idxno=166347"
+  },
+  {
+    "id": 42,
+    "year": "2023",
+    "date": "2023-12-07",
+    "source": "뉴스메이커",
+    "title": "효율과 상생은 미래 산업의 핵심 고려 요소",
+    "category": "대표 인터뷰",
+    "summary": "GL메트로시티 향동 지점 개설, 효율·상생 중심의 렌탈 서비스 전략 소개",
+    "url": "https://www.newsmaker.or.kr/news/articleView.html?idxno=146791"
+  },
+  {
+    "id": 43,
+    "year": "2024",
+    "date": "2024",
+    "source": "뉴스메이커",
+    "title": "'공유'와 '맞춤형'의 시너지는 렌탈업계의 핵심 경영 요소",
+    "category": "기업 소개",
+    "summary": "향동 지점 오픈, B2B 렌탈시장 확장과 맞춤형 서비스 전략 소개",
+    "url": "https://www.newsmaker.or.kr/news/quickViewArticleView.html?idxno=149500"
+  },
+  {
+    "id": 44,
+    "year": "2025",
+    "date": "2025-03-05",
+    "source": "뉴스메이커",
+    "title": "고객 중심 경영과 혁신으로 100년 기업을 향한 힘찬 도약을 시작하다",
+    "category": "대표 인터뷰",
+    "summary": "고객 중심 경영, 혁신, 공유경제와 장기 성장 전략 소개",
+    "url": "https://www.newsmaker.or.kr/news/articleView.html?idxno=161652"
+  },
+  {
+    "id": 45,
+    "year": "2025",
+    "date": "2025-05-29",
+    "source": "일간스포츠",
+    "title": "칼라테크오에이, 복합기 단기 성장 1위 기업",
+    "category": "성장·실적",
+    "summary": "약 1,800개 파트너사, 캐논코리아 공식 파트너, 매출 성장 전망 소개",
+    "url": "https://isplus.com/article/view/isp202505290153"
+  },
+  {
+    "id": 46,
+    "year": "2025",
+    "date": "2025-11-27",
+    "source": "동아일보",
+    "title": "맞춤형 복합기 렌털 솔루션, 고객 만족↑",
+    "category": "수상",
+    "summary": "2025 대한민국 중소·중견기업 대상 고객감동 부문 2년 연속 수상",
+    "url": "https://www.donga.com/news/Economy/article/all/20251126/132839355/2"
+  },
+  {
+    "id": 47,
+    "year": "2026",
+    "date": "2026-07-03",
+    "source": "뉴스메이커",
+    "title": "변화하는 디지털 환경에 맞춰 새로운 서비스 가치를 창출하겠다",
+    "category": "대표 인터뷰",
+    "summary": "디지털 환경 변화에 대응한 통합 서비스와 고객 가치 창출 전략 소개",
+    "url": "https://m.newsmaker.or.kr/news/articleView.html?idxno=178640"
   }
 ];
 
