@@ -9,7 +9,7 @@ const navItems = [
   { label: '서비스', href: '/#services' },
   { label: '주요제품', href: '/#products' },
   { label: 'FAQ', href: '/#faq' },
-  { label: '설치사례', href: '/#installations' },
+  { label: '설치사례', href: '/installations' },
   { label: '보도·수상', href: '/press-awards' },
   { label: '블로그', href: '/blog' },
 ];
