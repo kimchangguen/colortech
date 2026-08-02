@@ -1,6 +1,7 @@
 export interface WP_Post {
   id: number;
   date: string;
+  modified?: string;
   slug: string;
   status: string;
   type: string;

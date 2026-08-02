@@ -4,8 +4,22 @@ import { notFound } from 'next/navigation';
 import { getPostBySlug, getAdjacentPosts } from '@/lib/wordpress';
 import BlogContent from '@/components/blog/BlogContent';
 import BlogPagination from '@/components/blog/BlogPagination';
+import JsonLd from '@/components/JsonLd';
+import { absoluteUrl, cleanText, createPageMetadata, limitText, SITE_NAME } from '@/lib/seo';
+import { breadcrumbSchema, organizationId } from '@/lib/structuredData';
 
 export const revalidate = 300;
+
+function buildPostDescription(excerptHtml: string) {
+  const excerpt = cleanText(excerptHtml);
+  const fallback = '복합기·프린터 렌탈과 설치, 유지보수에 필요한 실무 정보와 기업 환경별 장비 선택 기준, 비용 절감 방법 및 신속한 서비스 운영 노하우를 칼라테크OA가 자세히 안내합니다.';
+  return limitText(excerpt.length >= 80 ? excerpt : `${excerpt} ${fallback}`, 155);
+}
+
+function buildPostSeoTitle(titleHtml: string) {
+  const title = limitText(titleHtml, 45);
+  return title.length >= 22 ? title : limitText(`${title} - 복합기·프린터 렌탈 정보`, 45);
+}
 
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> }
@@ -23,25 +37,20 @@ export async function generateMetadata(
     };
   }
 
-  // Strip HTML tags for description
-  const description = post.excerpt.rendered.replace(/<[^>]+>/g, '').substring(0, 160);
-  const title = post.title.rendered.replace(/&amp;/g, '&').replace(/&#8211;/g, '-').replace(/&#8217;/g, "'");
+  const description = buildPostDescription(post.excerpt.rendered);
+  const title = buildPostSeoTitle(post.title.rendered);
   const imageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/images/slide_01.png';
 
-  return {
+  return createPageMetadata({
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      images: [imageUrl],
-      type: 'article',
-      publishedTime: post.date,
-    },
-    alternates: {
-      canonical: `/blog/${post.slug}`,
-    }
-  };
+    path: `/blog/${post.slug}`,
+    type: 'article',
+    image: imageUrl,
+    imageAlt: `${title} 대표 이미지`,
+    publishedTime: post.date,
+    modifiedTime: post.modified || post.date,
+  });
 }
 
 export default async function BlogPostPage(
@@ -56,7 +65,8 @@ export default async function BlogPostPage(
 
   const { prev, next } = await getAdjacentPosts(post.date);
 
-  const title = post.title.rendered.replace(/&amp;/g, '&').replace(/&#8211;/g, '-').replace(/&#8217;/g, "'");
+  const title = cleanText(post.title.rendered);
+  const description = buildPostDescription(post.excerpt.rendered);
   const publishDate = new Date(post.date).toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: 'long',
@@ -66,6 +76,36 @@ export default async function BlogPostPage(
 
   return (
     <article className="pt-32 pb-20 bg-white min-h-screen">
+      <JsonLd data={[
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: limitText(title, 110),
+          description,
+          image: [featuredImage || absoluteUrl('/images/og-default.jpg')],
+          datePublished: post.date,
+          dateModified: post.modified || post.date,
+          mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+          inLanguage: 'ko-KR',
+          author: { '@type': 'Organization', '@id': organizationId, name: SITE_NAME },
+          publisher: {
+            '@type': 'Organization',
+            '@id': organizationId,
+            name: SITE_NAME,
+            logo: {
+              '@type': 'ImageObject',
+              url: absoluteUrl('/icon-512.png'),
+              width: 512,
+              height: 512,
+            },
+          },
+        },
+        breadcrumbSchema([
+          { name: '홈', path: '/' },
+          { name: '블로그', path: '/blog' },
+          { name: title, path: `/blog/${post.slug}` },
+        ]),
+      ]} />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-10 text-center">
           <span className="text-[#555555] mb-4 block">{publishDate}</span>

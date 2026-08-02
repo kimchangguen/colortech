@@ -5,17 +5,31 @@ import BlogFilter from '@/components/blog/BlogFilter';
 import FeaturedPost from '@/components/blog/FeaturedPost';
 import BlogList from '@/components/blog/BlogList';
 import Pagination from '@/components/blog/Pagination';
+import JsonLd from '@/components/JsonLd';
 import { getPostsAdvanced, getCategoryByName } from '@/lib/wordpress';
+import { createPageMetadata, SITE_URL } from '@/lib/seo';
+import { breadcrumbSchema } from '@/lib/structuredData';
 
 export const revalidate = 300; // ISR every 5 minutes
 
-export const metadata: Metadata = {
-  title: '블로그',
-  description: '복합기 렌탈, 프린터 렌탈, 설치사례, 유지보수, 업무노하우를 제공하는 칼라테크OA 공식 블로그입니다.',
-  alternates: {
-    canonical: '/blog',
-  },
-};
+const blogMetadata: Metadata = createPageMetadata({
+  title: '기업용 복합기·프린터 렌탈 설치 정보 블로그',
+  description: '복합기와 프린터 렌탈 비용, 제품 선택법, 기업별 설치사례, 소모품 관리와 유지보수 노하우를 실무 중심으로 소개하고 장비 운영에 필요한 정보를 제공하는 칼라테크OA 블로그입니다.',
+  path: '/blog',
+});
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}): Promise<Metadata> {
+  const params = await searchParams;
+  const isFilteredView = Boolean(params.q || params.category || params.page);
+
+  return isFilteredView
+    ? { ...blogMetadata, robots: { index: false, follow: false } }
+    : blogMetadata;
+}
 
 export default async function BlogPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -49,6 +63,21 @@ export default async function BlogPage(props: {
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
+      <JsonLd data={[
+        breadcrumbSchema([
+          { name: '홈', path: '/' },
+          { name: '블로그', path: '/blog' },
+        ]),
+        {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          '@id': `${SITE_URL}/blog#collection`,
+          url: `${SITE_URL}/blog`,
+          name: '칼라테크OA 블로그',
+          description: blogMetadata.description,
+          inLanguage: 'ko-KR',
+        },
+      ]} />
       <Header />
       
       <main className="flex-grow w-full">

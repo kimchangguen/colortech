@@ -4,15 +4,16 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingContact from '@/components/FloatingContact';
 import PressArchive from '@/components/PressArchive';
+import JsonLd from '@/components/JsonLd';
 import { pressArchive } from '@/data/pressArchive';
+import { createPageMetadata, SITE_URL } from '@/lib/seo';
+import { breadcrumbSchema } from '@/lib/structuredData';
 
-export const metadata: Metadata = {
-  title: '보도·수상',
-  description: '언론에 소개된 칼라테크오에이의 소식과 주요 수상 내역을 연도별로 확인하세요.',
-  alternates: {
-    canonical: '/press-awards',
-  },
-};
+export const metadata: Metadata = createPageMetadata({
+  title: '칼라테크 언론 보도·수상 및 기업 활동 아카이브',
+  description: '언론에 소개된 칼라테크오에이의 기업 활동, 기술·서비스 관련 기사와 주요 수상 및 표창 기록을 공식 출처 링크와 함께 연도별 아카이브에서 확인하세요.',
+  path: '/press-awards',
+});
 
 export default function PressAwardsPage() {
   const years = new Set(pressArchive.map((item) => item.year)).size;
@@ -20,6 +21,21 @@ export default function PressAwardsPage() {
 
   return (
     <div className="min-h-screen bg-white text-[#111111]">
+      <JsonLd data={[
+        breadcrumbSchema([
+          { name: '홈', path: '/' },
+          { name: '보도·수상', path: '/press-awards' },
+        ]),
+        {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          '@id': `${SITE_URL}/press-awards#collection`,
+          url: `${SITE_URL}/press-awards`,
+          name: '칼라테크OA 언론 보도 및 수상 내역',
+          description: metadata.description,
+          inLanguage: 'ko-KR',
+        },
+      ]} />
       <Header />
       <main>
         <section className="relative overflow-hidden bg-[#0B1220] px-4 pb-24 pt-40 text-white md:pb-32 md:pt-48">

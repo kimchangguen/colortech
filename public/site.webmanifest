@@ -1,0 +1,21 @@
+{
+  "name": "칼라테크OA",
+  "short_name": "칼라테크OA",
+  "description": "복합기·프린터 렌탈 및 유지보수 전문기업",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#315efb",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
