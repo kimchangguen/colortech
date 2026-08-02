@@ -1,8 +1,10 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Image from 'next/image';
 import { ArrowUpRight, Award, Building2, HeartHandshake, Newspaper } from 'lucide-react';
 import { pressArchive, type PressArchiveItem } from '@/data/pressArchive';
+import { pressImages } from '@/data/pressImages';
 
 type Filter = '전체' | '언론보도' | '수상·표창' | '사회공헌';
 
@@ -24,19 +26,23 @@ function ArchiveCard({ item }: { item: PressArchiveItem }) {
   const type = getType(item);
   const style = typeStyle[type];
   const Icon = style.icon;
+  const image = pressImages[item.id];
 
   return (
     <a href={item.url} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-[22px] border border-[#E5E7EB] bg-white transition duration-300 hover:-translate-y-1.5 hover:border-transparent hover:shadow-[0_22px_50px_rgba(15,23,42,0.12)]">
-      <div className={`relative flex h-[190px] flex-col justify-between overflow-hidden bg-gradient-to-br ${style.gradient} p-6 text-white`}>
-        <div className="absolute -right-8 -top-10 h-36 w-36 rounded-full border-[28px] border-white/10" />
-        <div className="absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-white/10 blur-sm" />
-        <div className="relative flex items-start justify-between">
-          <span className="rounded-full border border-white/25 bg-black/10 px-3 py-1.5 text-[11px] font-bold tracking-[0.16em] backdrop-blur-sm">{style.badge}</span>
-          <Icon size={27} strokeWidth={1.7} aria-hidden="true" />
-        </div>
-        <div className="relative">
-          <p className="text-[42px] font-bold leading-none tracking-[-0.05em]">{item.year}</p>
-          <p className="mt-2 truncate text-sm font-medium text-white/80">{item.source}</p>
+      <div className={`relative flex h-[210px] flex-col justify-between overflow-hidden bg-gradient-to-br ${style.gradient} p-5 text-white`}>
+        {image ? (
+          <Image src={image} alt={`${item.title} 대표 이미지`} fill className="object-cover transition duration-500 group-hover:scale-[1.04]" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px" />
+        ) : (
+          <>
+            <div className="absolute -right-8 -top-10 h-36 w-36 rounded-full border-[28px] border-white/10" />
+            <div className="absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-white/10 blur-sm" />
+            <div className="relative mt-auto"><p className="text-[42px] font-bold leading-none tracking-[-0.05em]">{item.year}</p><p className="mt-2 truncate text-sm font-medium text-white/80">{item.source}</p></div>
+          </>
+        )}
+        <div className="absolute inset-x-0 top-0 flex items-start justify-between bg-gradient-to-b from-black/55 to-transparent p-5">
+          <span className="rounded-full border border-white/30 bg-black/25 px-3 py-1.5 text-[11px] font-bold tracking-[0.16em] backdrop-blur-sm">{style.badge}</span>
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/25 backdrop-blur-sm"><Icon size={20} strokeWidth={1.8} aria-hidden="true" /></span>
         </div>
       </div>
       <div className="flex min-h-[220px] flex-col p-6">
