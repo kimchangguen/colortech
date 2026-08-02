@@ -7,8 +7,11 @@ import PressArchive from '@/components/PressArchive';
 import { pressArchive } from '@/data/pressArchive';
 
 export const metadata: Metadata = {
-  title: '보도·수상 | 칼라테크OA',
+  title: '보도·수상',
   description: '언론에 소개된 칼라테크오에이의 소식과 주요 수상 내역을 연도별로 확인하세요.',
+  alternates: {
+    canonical: '/press-awards',
+  },
 };
 
 export default function PressAwardsPage() {

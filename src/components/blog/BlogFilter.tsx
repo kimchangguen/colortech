@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Search } from 'lucide-react';
 
@@ -23,11 +23,6 @@ export default function BlogFilter() {
   const currentQuery = searchParams.get('q') || '';
 
   const [searchInput, setSearchInput] = useState(currentQuery);
-
-  // Sync state if URL changes
-  useEffect(() => {
-    setSearchInput(currentQuery);
-  }, [currentQuery]);
 
   const updateFilters = (category: string, query: string) => {
     const params = new URLSearchParams(searchParams.toString());

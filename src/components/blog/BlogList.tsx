@@ -7,57 +7,6 @@ interface BlogListProps {
   posts: WP_Post[];
 }
 
-const MOCK_POSTS = [
-  {
-    id: 'mock-1',
-    title: '기업 환경에 최적화된 복합기 렌탈 솔루션 도입 사례',
-    category: '설치사례',
-    date: '2026.07.03',
-    slug: 'mock-1',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80', // Office
-  },
-  {
-    id: 'mock-2',
-    title: '사무실 프린터 고장 시 대처 방법 및 자가 점검 가이드',
-    category: '유지보수',
-    date: '2026.07.01',
-    slug: 'mock-2',
-    image: 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=800&q=80', // Printer
-  },
-  {
-    id: 'mock-3',
-    title: '효율적인 업무 환경 구축을 위한 컬러 레이저 프린터 추천',
-    category: '복합기 추천',
-    date: '2026.06.28',
-    slug: 'mock-3',
-    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80', // Workspace
-  },
-  {
-    id: 'mock-4',
-    title: '전문 엔지니어의 정기 점검이 중요한 이유',
-    category: '업무노하우',
-    date: '2026.06.25',
-    slug: 'mock-4',
-    image: 'https://images.unsplash.com/photo-1581092921461-7031e4bfb83e?w=800&q=80', // Engineer
-  },
-  {
-    id: 'mock-5',
-    title: '렌탈 비용 절감의 핵심, 복합기 맞춤형 요금제 안내',
-    category: '비용안내',
-    date: '2026.06.20',
-    slug: 'mock-5',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80', // Finance/Cost
-  },
-  {
-    id: 'mock-6',
-    title: '대형 병원 문서 출력 시스템 구축 현장 스케치',
-    category: '설치사례',
-    date: '2026.06.15',
-    slug: 'mock-6',
-    image: 'https://images.unsplash.com/photo-1538688423619-a81d3f23454b?w=800&q=80', // Installation
-  }
-];
-
 export default function BlogList({ posts }: BlogListProps) {
   const decodeHtml = (html: string) => {
     return html.replace(/&#8211;/g, '-').replace(/&#8217;/g, "'").replace(/&amp;/g, '&');
@@ -92,7 +41,7 @@ export default function BlogList({ posts }: BlogListProps) {
   return (
     <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mb-20">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-16">
-        {posts.map((post: any) => {
+        {posts.map((post) => {
           let imageUrl = '/images/placeholder.jpg';
           let categoryName = '블로그';
           

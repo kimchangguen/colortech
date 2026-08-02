@@ -9,8 +9,16 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "칼라테크OA",
-  description: "복합기·프린터 렌탈 전문기업",
+  metadataBase: new URL("https://www.colortekoa-lite.com"),
+  title: {
+    default: "칼라테크OA",
+    template: "%s | 칼라테크OA",
+  },
+  description: "복합기·프린터 렌탈 및 유지보수 전문기업 칼라테크OA입니다.",
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

@@ -17,10 +17,6 @@ export default function BlogCard({ post }: BlogCardProps) {
     day: 'numeric'
   });
 
-  // Decode HTML entities in title and excerpt
-  const title = post.title.rendered.replace(/&amp;/g, '&').replace(/&#8211;/g, '-').replace(/&#8217;/g, "'");
-  const excerpt = post.excerpt.rendered.replace(/<[^>]+>/g, '').replace(/&hellip;/g, '...').substring(0, 100) + '...';
-
   return (
     <div className="group bg-white rounded-[24px] border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col h-full">
       <Link href={`/blog/${post.slug}`} className="block relative w-full aspect-[4/3] overflow-hidden">

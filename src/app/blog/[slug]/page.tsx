@@ -15,7 +15,11 @@ export async function generateMetadata(
   
   if (!post) {
     return {
-      title: '게시글을 찾을 수 없습니다 | 칼라테크OA',
+      title: '게시물을 찾을 수 없습니다',
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
@@ -25,7 +29,7 @@ export async function generateMetadata(
   const imageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/images/slide_01.png';
 
   return {
-    title: `${title} | 칼라테크OA 블로그`,
+    title,
     description,
     openGraph: {
       title,

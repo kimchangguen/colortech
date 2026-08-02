@@ -1,4 +1,5 @@
 import { FileText, MessageCircle, Phone } from 'lucide-react';
+import Link from 'next/link';
 
 const itemClass = 'flex h-14 w-14 items-center justify-center rounded-full border border-[#D5D9E2] bg-white text-[#15213A] shadow-[0_6px_20px_rgba(15,23,42,0.16)] transition hover:-translate-y-0.5 hover:bg-[#15213A] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#315EFB]';
 
@@ -15,9 +16,9 @@ export default function FloatingContact() {
       <button type="button" aria-label="카카오톡 문의" title="카카오톡 문의" className={itemClass}>
         <MessageCircle size={25} aria-hidden="true" />
       </button>
-      <a href="/#company-footer" aria-label="제안서 및 기업정보" title="제안서 및 기업정보" className={itemClass}>
+      <Link href="/#company-footer" aria-label="제안서 및 기업정보" title="제안서 및 기업정보" className={itemClass}>
         <FileText size={24} aria-hidden="true" />
-      </a>
+      </Link>
     </aside>
   );
 }

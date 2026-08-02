@@ -6,10 +6,10 @@ import InstallationGrid from '@/components/Installation/InstallationGrid';
 import { getPosts } from '@/lib/wordpress';
 
 export const metadata: Metadata = {
-  title: '설치사례 | 칼라테크OA',
+  title: '설치사례',
   description: '칼라테크OA의 복합기·프린터 설치 및 서비스 사례를 확인하세요.',
   alternates: {
-    canonical: 'https://www.colortekoa-lite.com/installations',
+    canonical: '/installations',
   },
 };
 

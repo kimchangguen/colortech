@@ -10,8 +10,11 @@ import { getPostsAdvanced, getCategoryByName } from '@/lib/wordpress';
 export const revalidate = 300; // ISR every 5 minutes
 
 export const metadata: Metadata = {
-  title: '칼라테크OA 블로그',
+  title: '블로그',
   description: '복합기 렌탈, 프린터 렌탈, 설치사례, 유지보수, 업무노하우를 제공하는 칼라테크OA 공식 블로그입니다.',
+  alternates: {
+    canonical: '/blog',
+  },
 };
 
 export default async function BlogPage(props: {

@@ -23,6 +23,11 @@ export interface WP_Post {
   };
 }
 
+interface WP_Category {
+  id: number;
+  name: string;
+}
+
 const WP_API = process.env.NEXT_PUBLIC_WORDPRESS_API || 'https://wordpress-1580849-6527382.cloudwaysapps.com/wp-json/wp/v2';
 
 export async function getPosts(perPage: number = 12): Promise<WP_Post[]> {
@@ -83,7 +88,7 @@ export async function getPostsByCategoryName(categoryName: string, perPage: numb
     const catRes = await fetch(`${WP_API}/categories?search=${encodeURIComponent(categoryName)}`, {
       next: { revalidate: 300 }
     });
-    const categories = await catRes.json();
+    const categories: WP_Category[] = await catRes.json();
     
     if (!categories || categories.length === 0) {
       console.warn(`Category "${categoryName}" not found.`);
@@ -91,7 +96,7 @@ export async function getPostsByCategoryName(categoryName: string, perPage: numb
     }
     
     // Find exact match or use the first result
-    const category = categories.find((c: any) => c.name === categoryName) || categories[0];
+    const category = categories.find((category) => category.name === categoryName) || categories[0];
     const categoryId = category.id;
 
     // 2. Get posts by category ID
@@ -150,9 +155,9 @@ export async function getCategoryByName(name: string): Promise<number | null> {
     const res = await fetch(`${WP_API}/categories?search=${encodeURIComponent(name)}`, {
       next: { revalidate: 300 }
     });
-    const categories = await res.json();
+    const categories: WP_Category[] = await res.json();
     if (!categories || categories.length === 0) return null;
-    const exactMatch = categories.find((c: any) => c.name === name);
+    const exactMatch = categories.find((category) => category.name === name);
     return exactMatch ? exactMatch.id : categories[0].id;
   } catch (error) {
     console.error(error);
