@@ -32,5 +32,9 @@ export const pressImages: Record<number, string> = {
   40: '/images/press/40.jpg',
   45: '/images/press/45.jpg',
   46: '/images/press/46.jpg',
+  48: '/images/press/48.jpg',
+  49: '/images/press/49.jpg',
+  50: '/images/press/50.jpg',
+  51: '/images/press/51.jpg',
 };
 

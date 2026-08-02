@@ -377,7 +377,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "뉴스메이커",
     "title": "사람을 소중히 할 줄 모르는 기업은 큰 성장을 이룰 수 없다",
     "category": "대표 인터뷰",
-    "summary": "고객·인재 중심 경영, 직영점 확대, 사회공헌 및 렌탈 서비스 경쟁력 소개",
+    "summary": "인재·고객 중심 경영, 직영점 확대, 공유경제와 사회공헌 소개",
     "url": "https://www.newsmaker.or.kr/news/quickViewArticleView.html?idxno=133796"
   },
   {
@@ -387,7 +387,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "뉴스메이커",
     "title": "국내 경제의 일선에서 합리적인 조력자 역할 수행하겠다",
     "category": "대표 인터뷰",
-    "summary": "공유경제와 맞춤형 사무기기 렌탈 서비스, 사업 확장 전략 소개",
+    "summary": "공유경제 경영전략과 기업 맞춤형 복합기 렌탈 서비스 소개",
     "url": "https://www.newsmaker.or.kr/news/articleView.html?idxno=138815"
   },
   {
@@ -397,7 +397,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "동아일보",
     "title": "비포 서비스를 통해 고객의 마음속으로 홀인원",
     "category": "기업 소개",
-    "summary": "맞춤형 솔루션, 캐논코리아 공식 파트너 계약, 비포 서비스 소개",
+    "summary": "전국 고객사, 비포 서비스, 캐논코리아 공식 파트너 계약 소개",
     "url": "https://www.donga.com/news/Economy/article/all/20241218/130665177/2"
   },
   {
@@ -407,7 +407,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "이코노미스트",
     "title": "복합기 전문기업 '칼라테크오에이', 복합기 렌탈 단기 성장률 1위",
     "category": "성장·실적",
-    "summary": "파트너사 확대, 맞춤형 솔루션, 지점 확장과 성장 실적 소개",
+    "summary": "기업 고객 확대, 직영점 확장, 복합기 임대 매출 성장 소개",
     "url": "https://economist.co.kr/article/view/ecn202503050070"
   },
   {
@@ -427,7 +427,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "뉴스메이커",
     "title": "효율과 상생은 미래 산업의 핵심 고려 요소",
     "category": "대표 인터뷰",
-    "summary": "GL메트로시티 향동 지점 개설, 효율·상생 중심의 렌탈 서비스 전략 소개",
+    "summary": "효율·상생 중심 경영과 GL메트로시티 향동 지점 확대 내용",
     "url": "https://www.newsmaker.or.kr/news/articleView.html?idxno=146791"
   },
   {
@@ -437,7 +437,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "뉴스메이커",
     "title": "'공유'와 '맞춤형'의 시너지는 렌탈업계의 핵심 경영 요소",
     "category": "기업 소개",
-    "summary": "향동 지점 오픈, B2B 렌탈시장 확장과 맞춤형 서비스 전략 소개",
+    "summary": "B2B 렌탈시장, 맞춤형 서비스, 지점 확장 전략 소개",
     "url": "https://www.newsmaker.or.kr/news/quickViewArticleView.html?idxno=149500"
   },
   {
@@ -447,7 +447,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "뉴스메이커",
     "title": "고객 중심 경영과 혁신으로 100년 기업을 향한 힘찬 도약을 시작하다",
     "category": "대표 인터뷰",
-    "summary": "고객 중심 경영, 혁신, 공유경제와 장기 성장 전략 소개",
+    "summary": "고객 중심 경영, 응변창신, 공유경제와 장기 성장 비전 소개",
     "url": "https://www.newsmaker.or.kr/news/articleView.html?idxno=161652"
   },
   {
@@ -457,7 +457,7 @@ export const pressArchive: PressArchiveItem[] = [
     "source": "일간스포츠",
     "title": "칼라테크오에이, 복합기 단기 성장 1위 기업",
     "category": "성장·실적",
-    "summary": "약 1,800개 파트너사, 캐논코리아 공식 파트너, 매출 성장 전망 소개",
+    "summary": "약 1,800개 기업 고객, 캐논코리아 공식 파트너, 매출 성장 전망 소개",
     "url": "https://isplus.com/article/view/isp202505290153"
   },
   {
@@ -479,6 +479,46 @@ export const pressArchive: PressArchiveItem[] = [
     "category": "대표 인터뷰",
     "summary": "디지털 환경 변화에 대응한 통합 서비스와 고객 가치 창출 전략 소개",
     "url": "https://m.newsmaker.or.kr/news/articleView.html?idxno=178640"
+  },
+  {
+    "id": 48,
+    "year": "2022",
+    "date": "2022-03-01",
+    "source": "포스트21 뉴스",
+    "title": "㈜칼라테크오에이 정진석 대표, 임인년 새해 포부 밝혀 “고객 만족을 최우선으로, 상생의 길을!”",
+    "category": "대표 인터뷰",
+    "summary": "성동구 상공회 활동, 고객·직원 중심 열린경영, 2022년 경영 포부 소개",
+    "url": "https://post21.tistory.com/category/%EA%B8%B0%EC%97%85%26%EC%9D%B4%EC%8A%88"
+  },
+  {
+    "id": 49,
+    "year": "2022",
+    "date": "2022-03-08",
+    "source": "오늘의인물",
+    "title": "고객을 향한 '상생'과 '나눔'으로 쌓은 신뢰, 국내 1위를 만들다",
+    "category": "기업·대표 인터뷰",
+    "summary": "고객 중심 서비스, 사회공헌, 복합기 렌탈 성장 과정 소개",
+    "url": "https://www.epeopletoday.com/news/articleView.html?idxno=15324"
+  },
+  {
+    "id": 50,
+    "year": "2024",
+    "date": "2024-12-20",
+    "source": "동아일보",
+    "title": "컬러 복합기 맞춤 렌털 솔루션, 고객만족 ↑",
+    "category": "수상",
+    "summary": "2024 대한민국 중소·중견기업 대상 고객감동 부문 수상",
+    "url": "https://www.donga.com/news/Economy/article/all/20241219/130675587/2"
+  },
+  {
+    "id": 51,
+    "year": "2026",
+    "date": "2026-05-14",
+    "source": "핸드메이커",
+    "title": "사전 장애 감지 시스템으로 고객 감동 실현 – 칼라테크오에이 정진석 대표",
+    "category": "대표 인터뷰",
+    "summary": "사전 장애 감지, 원격 모니터링, 고객 중심 서비스와 기업 성장 과정 소개",
+    "url": "https://www.handmk.com/news/articleView.html?idxno=38015"
   }
 ];
 
