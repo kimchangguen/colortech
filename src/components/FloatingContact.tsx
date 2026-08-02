@@ -4,7 +4,7 @@ const itemClass = 'flex h-14 w-14 items-center justify-center rounded-full borde
 
 export default function FloatingContact() {
   return (
-    <aside aria-label="빠른 문의" className="fixed left-4 bottom-5 z-40 flex flex-col gap-3 md:left-7 md:bottom-8">
+    <aside aria-label="빠른 문의" className="fixed left-4 right-auto bottom-5 z-40 flex flex-col gap-3 md:left-7 md:right-auto md:bottom-8">
       <a href="tel:027191644" aria-label="전화 문의 02-719-1644" title="전화 문의" className={itemClass}><Phone size={24} aria-hidden="true" /></a>
       <button type="button" aria-label="카카오톡 문의" title="카카오톡 문의" className={itemClass}><MessageCircle size={25} aria-hidden="true" /></button>
       <a href="/#company-footer" aria-label="제안서 및 기업정보" title="제안서 및 기업정보" className={itemClass}><FileText size={24} aria-hidden="true" /></a>
