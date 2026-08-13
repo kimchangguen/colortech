@@ -10,19 +10,19 @@ interface BlogPaginationProps {
 
 export default function BlogPagination({ prevPost, nextPost }: BlogPaginationProps) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-16 pt-8 border-t border-gray-200">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-16 pt-8 border-t border-[#EEEEEE]">
       {/* Previous Post (Older) */}
       <div>
         {prevPost ? (
-          <Link href={`/blog/${prevPost.slug}`} className="group flex flex-col p-4 rounded-xl hover:bg-gray-50 transition-colors">
+          <Link href={`/blog/${prevPost.slug}`} className="group flex flex-col py-2">
             <span className="flex items-center text-sm text-[#555555] mb-2">
-              <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-1 transition-transform" />
+              <ArrowLeft size={16} className="mr-2 text-[#F59E0B] group-hover:-translate-x-1 transition-transform" />
               이전글
             </span>
-            <span className="font-medium text-[#111111] line-clamp-1" dangerouslySetInnerHTML={{ __html: prevPost.title.rendered }}></span>
+            <span className="font-medium text-[#111111] line-clamp-1 group-hover:text-[#B5720A] transition-colors" dangerouslySetInnerHTML={{ __html: prevPost.title.rendered }}></span>
           </Link>
         ) : (
-          <div className="p-4">
+          <div className="py-2">
             <span className="flex items-center text-sm text-gray-400 mb-2">
               <ArrowLeft size={16} className="mr-2" />
               이전글
@@ -35,15 +35,15 @@ export default function BlogPagination({ prevPost, nextPost }: BlogPaginationPro
       {/* Next Post (Newer) */}
       <div className="text-right">
         {nextPost ? (
-          <Link href={`/blog/${nextPost.slug}`} className="group flex flex-col items-end p-4 rounded-xl hover:bg-gray-50 transition-colors">
+          <Link href={`/blog/${nextPost.slug}`} className="group flex flex-col items-end py-2">
             <span className="flex items-center justify-end text-sm text-[#555555] mb-2">
               다음글
-              <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={16} className="ml-2 text-[#F59E0B] group-hover:translate-x-1 transition-transform" />
             </span>
-            <span className="font-medium text-[#111111] line-clamp-1" dangerouslySetInnerHTML={{ __html: nextPost.title.rendered }}></span>
+            <span className="font-medium text-[#111111] line-clamp-1 group-hover:text-[#B5720A] transition-colors" dangerouslySetInnerHTML={{ __html: nextPost.title.rendered }}></span>
           </Link>
         ) : (
-          <div className="p-4 flex flex-col items-end">
+          <div className="py-2 flex flex-col items-end">
             <span className="flex items-center justify-end text-sm text-gray-400 mb-2">
               다음글
               <ArrowRight size={16} className="ml-2" />

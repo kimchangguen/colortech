@@ -21,6 +21,12 @@ export interface WP_Post {
       name: string;
       slug: string;
     }>>;
+    author?: Array<{
+      name: string;
+      avatar_urls?: {
+        [size: string]: string;
+      };
+    }>;
   };
 }
 

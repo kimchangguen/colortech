@@ -39,3 +39,219 @@ html {
     display: none;
   }
 }
+
+/* ==========================================================================
+   Blog article body (WordPress content.rendered)
+   Renders raw WP HTML — no custom classes/ids exist in the source markup,
+   so every rule below targets plain semantic tags only.
+   ========================================================================== */
+.blog-article {
+  color: #292929;
+  font-size: 16px;
+  line-height: 1.9;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .blog-article {
+    font-size: 17px;
+  }
+}
+
+.blog-article p {
+  margin: 1.4em 0 0;
+  color: #292929;
+}
+
+.blog-article > :first-child {
+  margin-top: 0;
+}
+
+.blog-article strong,
+.blog-article b {
+  font-weight: 700;
+  color: #111111;
+}
+
+.blog-article hr {
+  border: none;
+  border-top: 1px solid #EDEDED;
+  margin: 2.5em 0;
+}
+
+/* Intro / lead paragraphs — any top-level <p> before the first <h2> */
+.blog-article > p:not(h2 ~ p) {
+  background: #FAF6EC;
+  border-radius: 8px;
+  padding: 20px 24px;
+  color: #333333;
+}
+
+/* H2 section headings */
+.blog-article h2 {
+  background: #FAF6EC;
+  border-left: 4px solid #F59E0B;
+  border-radius: 2px;
+  padding: 10px 16px;
+  margin: 3em 0 1.2em;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #111111;
+}
+
+@media (min-width: 768px) {
+  .blog-article h2 {
+    font-size: 23px;
+  }
+}
+
+/* H3 subheadings */
+.blog-article h3 {
+  position: relative;
+  margin: 2.2em 0 0.8em;
+  padding-left: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111111;
+}
+
+@media (min-width: 768px) {
+  .blog-article h3 {
+    font-size: 19px;
+  }
+}
+
+.blog-article h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F59E0B;
+}
+
+/* Lists */
+.blog-article ul,
+.blog-article ol {
+  margin: 1.3em 0;
+  padding-left: 1.4em;
+}
+
+.blog-article ul {
+  list-style: disc;
+}
+
+.blog-article ol {
+  list-style: decimal;
+}
+
+.blog-article li {
+  margin: 0.6em 0;
+  line-height: 1.85;
+}
+
+.blog-article li::marker {
+  color: #F59E0B;
+}
+
+.blog-article li > ul,
+.blog-article li > ol {
+  margin: 0.5em 0 0.5em 0.2em;
+}
+
+/* Images */
+.blog-article figure {
+  margin: 2em 0;
+}
+
+.blog-article figure:empty {
+  display: none;
+}
+
+.blog-article img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+.blog-article figcaption {
+  margin-top: 0.6em;
+  text-align: center;
+  font-size: 13px;
+  color: #888888;
+}
+
+/* Tables */
+.blog-article table {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  margin: 1.8em 0;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.blog-article th {
+  background: #111111;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 14px;
+  white-space: nowrap;
+}
+
+.blog-article td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #EDEDED;
+}
+
+.blog-article tr:last-child td {
+  border-bottom: none;
+}
+
+/* Blockquote */
+.blog-article blockquote {
+  background: #F7F7F7;
+  border-left: 3px solid #F59E0B;
+  padding: 14px 20px;
+  margin: 1.8em 0;
+  color: #333333;
+  font-style: normal;
+}
+
+.blog-article blockquote p {
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Links */
+.blog-article a {
+  color: #B5720A;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(245, 158, 11, 0.4);
+  text-underline-offset: 3px;
+}
+
+.blog-article a:hover {
+  color: #F59E0B;
+}
+
+/* A paragraph that contains nothing but a link reads as a CTA/reference box */
+.blog-article p:has(> a:only-child) {
+  background: #FAF6EC;
+  border-radius: 8px;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.blog-article p:has(> a:only-child) a {
+  text-decoration: none;
+}

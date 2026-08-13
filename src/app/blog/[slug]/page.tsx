@@ -73,6 +73,9 @@ export default async function BlogPostPage(
     day: 'numeric'
   });
   const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || null;
+  const categoryName = post._embedded?.['wp:term']?.[0]?.[0]?.name || null;
+  const authorName = post._embedded?.author?.[0]?.name || null;
+  const authorAvatar = post._embedded?.author?.[0]?.avatar_urls?.['48'] || null;
 
   return (
     <article className="pt-32 pb-20 bg-white min-h-screen">
@@ -106,21 +109,35 @@ export default async function BlogPostPage(
           { name: title, path: `/blog/${post.slug}` },
         ]),
       ]} />
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[880px] mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-10 text-center">
-          <span className="text-[#555555] mb-4 block">{publishDate}</span>
-          <h1 
-            className="text-3xl md:text-5xl font-bold text-[#111111] mb-8 leading-tight tracking-tight"
+          {categoryName && (
+            <span className="inline-block mb-4 px-3 py-1 rounded-full bg-[#FAF6EC] text-[#B5720A] text-[13px] font-semibold tracking-wide">
+              {categoryName}
+            </span>
+          )}
+          <h1
+            className="text-[26px] md:text-[38px] font-bold text-[#111111] mb-5 leading-[1.35] tracking-tight"
             dangerouslySetInnerHTML={{ __html: title }}
           />
+          <div className="flex items-center justify-center gap-3 text-[14px] text-[#555555] mb-10">
+            <span>{publishDate}</span>
+            {authorName && (
+              <>
+                <span className="text-[#DDDDDD]">·</span>
+                <span>{authorName}</span>
+              </>
+            )}
+          </div>
           {featuredImage && (
-            <div className="relative w-full aspect-[16/9] rounded-[24px] overflow-hidden mb-12">
+            <div className="w-full">
               <BlogImage
                 src={featuredImage}
                 alt={title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1200px) 100vw, 800px"
+                width={1200}
+                height={675}
+                className="w-full h-auto rounded-[8px]"
+                sizes="(max-width: 900px) 100vw, 880px"
                 priority
               />
             </div>
@@ -128,7 +145,30 @@ export default async function BlogPostPage(
         </header>
 
         <BlogContent content={post.content.rendered} />
-        
+
+        {authorName && (
+          <div className="flex items-center gap-3 mt-14 pt-6 border-t border-[#EEEEEE]">
+            {authorAvatar ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={authorAvatar}
+                alt={authorName}
+                width={40}
+                height={40}
+                className="w-10 h-10 rounded-full"
+              />
+            ) : (
+              <div className="w-10 h-10 rounded-full bg-[#FAF6EC] text-[#B5720A] flex items-center justify-center font-semibold">
+                {authorName.charAt(0)}
+              </div>
+            )}
+            <div>
+              <p className="text-[14px] font-semibold text-[#111111]">{authorName}</p>
+              <p className="text-[13px] text-[#888888]">칼라테크OA</p>
+            </div>
+          </div>
+        )}
+
         <BlogPagination prevPost={prev} nextPost={next} />
       </div>
     </article>
