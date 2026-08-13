@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Header from '@/components/Header';
 import { getPostBySlug, getAdjacentPosts } from '@/lib/wordpress';
 import BlogContent from '@/components/blog/BlogContent';
 import BlogImage from '@/components/blog/BlogImage';
@@ -102,6 +103,7 @@ export default async function BlogPostPage(
 
   return (
     <article className="pt-32 pb-20 bg-white min-h-screen">
+      <Header />
       <JsonLd data={[
         {
           '@context': 'https://schema.org',
