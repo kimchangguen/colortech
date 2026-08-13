@@ -10,6 +10,28 @@ import { breadcrumbSchema, organizationId } from '@/lib/structuredData';
 
 export const revalidate = 300;
 
+/**
+ * WordPress's auto image-placement pipeline usually inserts a photo of the
+ * same scene as the featured image at the very start of content.rendered.
+ * When that leading image is already present, the page-level featured image
+ * would just duplicate it visually, so we detect it here (without altering
+ * content.rendered) and skip rendering the separate featured image block.
+ */
+function contentHasLeadingImage(html: string): boolean {
+  const firstTag = html.trimStart().match(/^<(figure|img)\b[^>]*>/i);
+  if (!firstTag) return false;
+
+  const block = firstTag[1].toLowerCase() === 'figure'
+    ? (html.trimStart().match(/^<figure[^>]*>([\s\S]*?)<\/figure>/i)?.[1] || '')
+    : firstTag[0];
+
+  // Only count it as a real leading image if it points to an actual http(s)
+  // URL — unresolved placeholder schemes (e.g. "local-preview://") from the
+  // auto image-placement pipeline don't render, so falling back to the
+  // featured image is preferable in that case.
+  return /<img[^>]*\ssrc=["']https?:\/\/[^"']+["']/i.test(block);
+}
+
 function buildPostDescription(excerptHtml: string) {
   const excerpt = cleanText(excerptHtml);
   const fallback = '복합기·프린터 렌탈과 설치, 유지보수에 필요한 실무 정보와 기업 환경별 장비 선택 기준, 비용 절감 방법 및 신속한 서비스 운영 노하우를 칼라테크OA가 자세히 안내합니다.';
@@ -73,6 +95,7 @@ export default async function BlogPostPage(
     day: 'numeric'
   });
   const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || null;
+  const showFeaturedImage = Boolean(featuredImage) && !contentHasLeadingImage(post.content.rendered);
   const categoryName = post._embedded?.['wp:term']?.[0]?.[0]?.name || null;
   const authorName = post._embedded?.author?.[0]?.name || null;
   const authorAvatar = post._embedded?.author?.[0]?.avatar_urls?.['48'] || null;
@@ -129,7 +152,7 @@ export default async function BlogPostPage(
               </>
             )}
           </div>
-          {featuredImage && (
+          {showFeaturedImage && featuredImage && (
             <div className="w-full">
               <BlogImage
                 src={featuredImage}
