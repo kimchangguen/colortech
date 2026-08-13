@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import BlogImage from './BlogImage';
 import { WP_Post } from '@/lib/wordpress';
 import { ArrowRight } from 'lucide-react';
 
@@ -9,7 +9,7 @@ interface FeaturedPostProps {
 }
 
 export default function FeaturedPost({ post }: FeaturedPostProps) {
-  let imageUrl = '/images/placeholder.jpg';
+  let imageUrl = '/images/og-default.jpg';
   if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'].length > 0) {
     imageUrl = post._embedded['wp:featuredmedia'][0].source_url;
   }
@@ -39,7 +39,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
           
           {/* Image */}
           <div className="relative w-full lg:w-[60%] h-[280px] sm:h-[360px] lg:h-[420px] overflow-hidden bg-gray-100">
-            <Image 
+            <BlogImage
               src={imageUrl}
               alt={decodeHtml(post.title.rendered)}
               fill

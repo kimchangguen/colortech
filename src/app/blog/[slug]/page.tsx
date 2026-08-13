@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getPostBySlug, getAdjacentPosts } from '@/lib/wordpress';
 import BlogContent from '@/components/blog/BlogContent';
+import BlogImage from '@/components/blog/BlogImage';
 import BlogPagination from '@/components/blog/BlogPagination';
 import JsonLd from '@/components/JsonLd';
 import { absoluteUrl, cleanText, createPageMetadata, limitText, SITE_NAME } from '@/lib/seo';
@@ -115,7 +115,7 @@ export default async function BlogPostPage(
           />
           {featuredImage && (
             <div className="relative w-full aspect-[16/9] rounded-[24px] overflow-hidden mb-12">
-              <Image
+              <BlogImage
                 src={featuredImage}
                 alt={title}
                 fill

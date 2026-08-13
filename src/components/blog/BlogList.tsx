@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import BlogImage from './BlogImage';
 import { WP_Post } from '@/lib/wordpress';
 
 interface BlogListProps {
@@ -42,7 +42,7 @@ export default function BlogList({ posts }: BlogListProps) {
     <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mb-20">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-16">
         {posts.map((post) => {
-          let imageUrl = '/images/placeholder.jpg';
+          let imageUrl = '/images/og-default.jpg';
           let categoryName = '블로그';
           
           const title = decodeHtml(post.title.rendered);
@@ -65,8 +65,8 @@ export default function BlogList({ posts }: BlogListProps) {
                 
                 {/* Thumbnail Area */}
                 <div className="relative w-full h-[240px] rounded-[22px] overflow-hidden bg-gray-100 mb-5">
-                  <Image 
-                    src={imageUrl} 
+                  <BlogImage
+                    src={imageUrl}
                     alt={title}
                     fill
                     className="object-cover transition-transform duration-[350ms] ease-out group-hover:scale-[1.04]"
