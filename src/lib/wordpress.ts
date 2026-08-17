@@ -1,3 +1,5 @@
+import { cache } from 'react';
+
 export interface WP_Post {
   id: number;
   date: string;
@@ -50,7 +52,10 @@ export async function getPosts(perPage: number = 12): Promise<WP_Post[]> {
   }
 }
 
-export async function getPostBySlug(slug: string): Promise<WP_Post | null> {
+// Wrapped in React's cache() so that generateMetadata() and the page
+// component both resolving the same slug within one request/render pass
+// share a single WordPress request instead of firing it twice.
+export const getPostBySlug = cache(async (slug: string): Promise<WP_Post | null> => {
   try {
     const res = await fetch(`${WP_API}/posts?slug=${slug}&_embed`, {
       next: { revalidate: 300 }
@@ -62,19 +67,22 @@ export async function getPostBySlug(slug: string): Promise<WP_Post | null> {
     console.error(error);
     return null;
   }
-}
+});
 
+// Only slug/title are rendered by BlogPagination, so the response is
+// trimmed with _fields to cut payload from the (slow) WordPress origin.
 export async function getAdjacentPosts(date: string) {
   try {
-    // Get previous post (older than current)
-    const prevRes = await fetch(`${WP_API}/posts?before=${date}&per_page=1&order=desc`, {
-      next: { revalidate: 300 }
-    });
-    
-    // Get next post (newer than current)
-    const nextRes = await fetch(`${WP_API}/posts?after=${date}&per_page=1&order=asc`, {
-      next: { revalidate: 300 }
-    });
+    // Previous (older) and next (newer) posts are independent lookups —
+    // fire both requests together instead of awaiting one before the other.
+    const [prevRes, nextRes] = await Promise.all([
+      fetch(`${WP_API}/posts?before=${date}&per_page=1&order=desc&_fields=slug,title`, {
+        next: { revalidate: 300 }
+      }),
+      fetch(`${WP_API}/posts?after=${date}&per_page=1&order=asc&_fields=slug,title`, {
+        next: { revalidate: 300 }
+      }),
+    ]);
 
     const prevPosts = prevRes.ok ? await prevRes.json() : [];
     const nextPosts = nextRes.ok ? await nextRes.json() : [];
@@ -86,6 +94,22 @@ export async function getAdjacentPosts(date: string) {
   } catch (error) {
     console.error(error);
     return { prev: null, next: null };
+  }
+}
+
+// Minimal-payload slug list for generateStaticParams — pre-renders posts
+// at build time so first-ever visits skip the slow WordPress round trip.
+export async function getRecentPostSlugs(limit: number = 100): Promise<string[]> {
+  try {
+    const res = await fetch(`${WP_API}/posts?per_page=${limit}&_fields=slug`, {
+      next: { revalidate: 300 }
+    });
+    if (!res.ok) throw new Error('Failed to fetch post slugs');
+    const posts: Array<{ slug: string }> = await res.json();
+    return posts.map((post) => post.slug);
+  } catch (error) {
+    console.error(error);
+    return [];
   }
 }
 

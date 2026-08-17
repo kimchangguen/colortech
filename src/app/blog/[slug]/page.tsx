@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
-import { getPostBySlug, getAdjacentPosts } from '@/lib/wordpress';
+import { getPostBySlug, getAdjacentPosts, getRecentPostSlugs } from '@/lib/wordpress';
 import BlogContent from '@/components/blog/BlogContent';
 import BlogImage from '@/components/blog/BlogImage';
 import BlogPagination from '@/components/blog/BlogPagination';
@@ -10,6 +10,15 @@ import { absoluteUrl, cleanText, createPageMetadata, limitText, SITE_NAME } from
 import { breadcrumbSchema, organizationId } from '@/lib/structuredData';
 
 export const revalidate = 300;
+
+// Pre-render existing posts at build time so first-ever visits are served
+// from the static cache instead of waiting on the WordPress origin.
+// Newly published posts still resolve on-demand via dynamicParams (default)
+// and get cached for subsequent visitors within the revalidate window.
+export async function generateStaticParams() {
+  const slugs = await getRecentPostSlugs(100);
+  return slugs.map((slug) => ({ slug }));
+}
 
 /**
  * WordPress's auto image-placement pipeline usually inserts a photo of the
